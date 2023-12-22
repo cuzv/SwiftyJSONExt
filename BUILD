@@ -14,6 +14,7 @@ apple_framework(
         "//visibility:public",
     ],
     deps = [
+        "//internals/Infrastructure",
         "@SwiftyJSON",
     ],
 )
