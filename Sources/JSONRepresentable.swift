@@ -6,8 +6,8 @@ public protocol JSONRepresentable {
   init?(json: JSON)
 }
 
-extension JSONRepresentable {
-  public var json: JSON {
+public extension JSONRepresentable {
+  var json: JSON {
     .init(self)
   }
 }
@@ -22,8 +22,8 @@ extension JSON: JSONRepresentable {
   }
 }
 
-extension JSONRepresentable {
-  public func encode(
+public extension JSONRepresentable {
+  func encode(
     encoding: String.Encoding = .utf8,
     options: JSONSerialization.WritingOptions = []
   ) -> String? {
@@ -67,79 +67,79 @@ extension Dictionary: JSONRepresentable where Value: JSONRepresentable, Key == S
 
 // MARK: - Resolving
 
-extension JSON {
+public extension JSON {
   /// Map JSON to Model
-  public func map<M>(_ transform: (JSON) -> M?) -> M? {
+  func map<M>(_ transform: (JSON) -> M?) -> M? {
     transform(self)
   }
 
   /// Resolve JSON to Model
-  public func resolved<M: JSONRepresentable>() -> M? {
+  func resolved<M: JSONRepresentable>() -> M? {
     map(M.init(json:))
   }
 
   /// Resolve JSON to [Model]
-  public func resolved<M: JSONRepresentable>() -> [M] {
+  func resolved<M: JSONRepresentable>() -> [M] {
     arrayValue.compactMap(M.init(json:))
   }
 
   /// Resolve JSON to [String: Model]
-  public func resolved<M: JSONRepresentable>() -> [String: M] {
+  func resolved<M: JSONRepresentable>() -> [String: M] {
     dictionaryValue.compactMapValues(M.init(json:))
   }
 
   /// Resolve JSON to Bool
-  public func resolved() -> Bool {
+  func resolved() -> Bool {
     boolValue
   }
 
   /// Resolve JSON to String
-  public func resolved() -> String {
+  func resolved() -> String {
     stringValue
   }
 
   /// Resolve JSON to NSNumber
-  public func resolved() -> NSNumber {
+  func resolved() -> NSNumber {
     numberValue
   }
 
   /// Resolve JSON to URL
-  public func resolved() -> URL {
+  func resolved() -> URL {
     url ?? URL(string: "https://httpbin.org/")!
   }
 
   /// Resolve JSON to Float
-  public func resolved() -> Float {
+  func resolved() -> Float {
     floatValue
   }
 
   /// Resolve JSON to Double
-  public func resolved() -> Double {
+  func resolved() -> Double {
     doubleValue
   }
 
   /// Resolve JSON to Int
-  public func resolved() -> Int {
+  func resolved() -> Int {
     intValue
   }
 
   /// Resolve JSON to Int8
-  public func resolved() -> Int8 {
+  func resolved() -> Int8 {
     int8Value
   }
 
   /// Resolve JSON to Int16
-  public func resolved() -> Int16 {
+  func resolved() -> Int16 {
     int16Value
   }
 
   /// Resolve JSON to Int32
-  public func resolved() -> Int32 {
+  func resolved() -> Int32 {
     int32Value
   }
 
   /// Resolve JSON to Int64
-  public func resolved() -> Int64 {
+  func resolved() -> Int64 {
     int64Value
   }
 }

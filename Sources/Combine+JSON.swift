@@ -1,6 +1,6 @@
 #if canImport(SwiftyJSONExt)
-import Foundation
 import Combine
+import Foundation
 import Infrastructure
 import SwiftyJSON
 
@@ -13,7 +13,8 @@ public extension Publisher {
   func decodeJson<Model>(
     field: String? = nil
   ) -> AnyPublisher<Model, Failure>
-  where Output == JSON, Model: JSONRepresentable {
+    where Output == JSON, Model: JSONRepresentable
+  {
     decodeJson(type: Model.self, field: field)
   }
 
@@ -21,12 +22,13 @@ public extension Publisher {
     type: Model.Type,
     field: String? = nil
   ) -> AnyPublisher<Model, Failure>
-  where Output == JSON, Model: JSONRepresentable {
+    where Output == JSON, Model: JSONRepresentable
+  {
     map { json in
-      if let field = field {
-        return json[field]
+      if let field {
+        json[field]
       } else {
-        return json
+        json
       }
     }
     .compactMap(Model.init(json:))
@@ -36,7 +38,8 @@ public extension Publisher {
   func decodeJson<Model>(
     field: String? = nil
   ) -> AnyPublisher<Model, Failure>
-  where Output == Data, Model: JSONRepresentable {
+    where Output == Data, Model: JSONRepresentable
+  {
     json().decodeJson(field: field)
   }
 
@@ -44,7 +47,8 @@ public extension Publisher {
     type: Model.Type,
     field: String? = nil
   ) -> AnyPublisher<Model, Failure>
-  where Output == Data, Model: JSONRepresentable {
+    where Output == Data, Model: JSONRepresentable
+  {
     json().decodeJson(type: type, field: field)
   }
 
@@ -75,7 +79,8 @@ public extension Publisher {
   func decodeValidJson<Model>(
     field: String? = nil
   ) -> AnyPublisher<Model, AnyError>
-  where Output == Data, Failure == AnyError, Model: JSONRepresentable {
+    where Output == Data, Failure == AnyError, Model: JSONRepresentable
+  {
     json().validate().decodeJson(field: field)
   }
 
@@ -83,7 +88,8 @@ public extension Publisher {
     type: Model.Type,
     field: String? = nil
   ) -> AnyPublisher<Model, AnyError>
-  where Output == Data, Failure == AnyError, Model: JSONRepresentable {
+    where Output == Data, Failure == AnyError, Model: JSONRepresentable
+  {
     json().validate().decodeJson(type: Model.self, field: field)
   }
 }
