@@ -1,4 +1,4 @@
-#if canImport(SwiftyJSONExt)
+#if canImport(Infrastructure)
 import Combine
 import Foundation
 import Infrastructure
