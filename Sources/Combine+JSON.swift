@@ -1,7 +1,5 @@
-#if canImport(Infrastructure)
 import Combine
 import Foundation
-import Infrastructure
 import SwiftyJSON
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, macCatalyst 13.0, *)
@@ -51,52 +49,59 @@ public extension Publisher {
   {
     json().decodeJson(type: type, field: field)
   }
+}
 
-  func validate() -> Publishers.FlatMap<
+#if canImport(Infrastructure)
+import Infrastructure
+
+@available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, macCatalyst 13.0, *)
+public extension Publisher {
+  func validate(
+    with transformer: some ResponseTransformer
+  ) -> Publishers.FlatMap<
     AnyPublisher<JSON, AnyError>,
     Self
   > where Output == JSON, Failure == AnyError {
     flatMap { json -> AnyPublisher<JSON, AnyError> in
-      if json["status"].stringValue.lowercased() == "ok" {
-        return Just(json).setFailureType(to: AnyError.self).eraseToAnyPublisher()
-      } else {
-        let error = BusinessError(
-          code: json["code"].intValue,
-          message: json["message"].stringValue
-        )
-        return Fail(error: .init(error)).eraseToAnyPublisher()
+      do {
+        let data = try transformer.transform(payload: json)
+        return Just(data)
+          .setFailureType(to: AnyError.self)
+          .eraseToAnyPublisher()
+      } catch {
+        return Fail(error: .init(error))
+          .eraseToAnyPublisher()
       }
     }
   }
 
-  func validJson() -> Publishers.FlatMap<
+  func validJson(
+    with transformer: some ResponseTransformer = CommonResponseTransformer()
+  ) -> Publishers.FlatMap<
     AnyPublisher<JSON, AnyError>,
     Publishers.Map<Self, JSON>
   > where Output == Data, Failure == AnyError {
-    json().validate()
+    json().validate(with: transformer)
   }
 
   func decodeValidJson<Model>(
+    with transformer: some ResponseTransformer = CommonResponseTransformer(),
     field: String? = nil
   ) -> AnyPublisher<Model, AnyError>
     where Output == Data, Failure == AnyError, Model: JSONRepresentable
   {
-    json().validate().decodeJson(field: field)
+    json().validate(with: transformer).decodeJson(field: field)
   }
 
   func decodeValidJson<Model>(
+    with transformer: some ResponseTransformer = CommonResponseTransformer(),
     type: Model.Type,
     field: String? = nil
   ) -> AnyPublisher<Model, AnyError>
     where Output == Data, Failure == AnyError, Model: JSONRepresentable
   {
-    json().validate().decodeJson(type: Model.self, field: field)
+    json().validate(with: transformer).decodeJson(type: Model.self, field: field)
   }
-}
-
-public struct BusinessError: Error {
-  public let code: Int
-  public let message: String
 }
 
 #endif

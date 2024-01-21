@@ -2,6 +2,7 @@ import Foundation
 
 #if canImport(Alamofire)
 import Alamofire
+import SwiftyJSON
 
 public struct SwiftyJSONEncoding: ParameterEncoding {
   public static var `default`: SwiftyJSONEncoding { SwiftyJSONEncoding() }

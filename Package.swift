@@ -19,14 +19,12 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "5.0.1"),
-    .package(url: "https://github.com/cuzv/Infrastructure", branch: "master"),
   ],
   targets: [
     .target(
       name: "SwiftyJSONExt",
       dependencies: [
         "SwiftyJSON",
-        "Infrastructure",
       ],
       path: "Sources"
     ),

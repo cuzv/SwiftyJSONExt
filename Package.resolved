@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "infrastructure",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/cuzv/Infrastructure",
-      "state" : {
-        "branch" : "master",
-        "revision" : "820bbb1151ab8f830c90b19f697e92e7516567b4"
-      }
-    },
-    {
       "identity" : "swiftyjson",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",

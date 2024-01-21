@@ -31,6 +31,12 @@ public extension JSONRepresentable {
   }
 }
 
+public extension JSON {
+  var utf8String: String? {
+    rawString(.utf8, options: [])
+  }
+}
+
 // MARK: - Collection
 
 extension Array: JSONRepresentable where Element: JSONRepresentable {
