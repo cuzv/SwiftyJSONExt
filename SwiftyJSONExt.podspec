@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   spec.name             = "SwiftyJSONExt"
   spec.version          = "1.0.0"
-  spec.summary          = "Useful functionally extensions for Apple's UIKit framework."
+  spec.summary          = "Useful functionally extensions for SwiftyJSON framework."
   spec.homepage         = "https://github.com/cuzv/SwiftyJSONExt"
   spec.license          = "MIT"
   spec.author           = { "Shaw" => "cuzval@gmail.com" }
