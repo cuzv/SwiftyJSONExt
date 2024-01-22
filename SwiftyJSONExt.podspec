@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                           = "SwiftyJSONExt"
-  spec.version                        = "1.0.2"
+  spec.version                        = "1.0.3"
   spec.summary                        = "Useful functionally extensions for SwiftyJSON framework."
   spec.homepage                       = "https://github.com/cuzv/SwiftyJSONExt"
   spec.license                        = "MIT"
@@ -14,5 +14,6 @@ Pod::Spec.new do |spec|
   spec.requires_arc                   = true
   spec.swift_versions                 = '5'
   spec.dependency 'SwiftyJSON', '~> 5.0.1'
+  spec.dependency 'Alamofire', '~> 5.8.1'
   spec.dependency 'Infra'
 end
