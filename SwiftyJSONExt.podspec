@@ -5,8 +5,8 @@ Pod::Spec.new do |spec|
   spec.homepage                       = "https://github.com/cuzv/SwiftyJSONExt"
   spec.license                        = "MIT"
   spec.author                         = { "Shaw" => "cuzval@gmail.com" }
-  spec.ios.deployment_target          = "12.0"
-  spec.osx.deployment_target          = "10.13"
+  spec.ios.deployment_target          = "13.0"
+#  spec.osx.deployment_target          = "10.15"
 #  spec.watchos.deployment_target      = "4.0"
 #  spec.tvos.deployment_target         = "12.0"
   spec.source                         = { :git => "https://github.com/cuzv/SwiftyJSONExt.git", :tag => "#{spec.version}" }
