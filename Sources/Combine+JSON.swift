@@ -51,8 +51,8 @@ public extension Publisher {
   }
 }
 
-#if canImport(Infrastructure)
-import Infrastructure
+#if canImport(Infra)
+import Infra
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, macCatalyst 13.0, *)
 public extension Publisher {
