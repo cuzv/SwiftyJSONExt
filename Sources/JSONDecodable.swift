@@ -118,6 +118,18 @@ extension Int64: JSONDecodable {
   }
 }
 
+extension Array: JSONDecodable where Element: JSONDecodable {
+  public init(json: JSON) throws {
+    self = try json.arrayValue.resolved()
+  }
+}
+
+extension Dictionary: JSONDecodable where Value: JSONDecodable, Key == String {
+  public init(json: JSON) throws {
+    self = try json.dictionaryValue.resolved()
+  }
+}
+
 // MARK: - Resolving
 
 public extension JSON {

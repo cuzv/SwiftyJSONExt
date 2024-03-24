@@ -114,6 +114,18 @@ extension Int64: JSONMayDecodable {
   }
 }
 
+extension Array: JSONMayDecodable where Element: JSONMayDecodable {
+  public init?(attempt json: JSON) {
+    self = json.arrayValue.resolved()
+  }
+}
+
+extension Dictionary: JSONMayDecodable where Value: JSONMayDecodable, Key == String {
+  public init?(attempt json: JSON) {
+    self = json.dictionaryValue.resolved()
+  }
+}
+
 // MARK: - Resolving
 
 public extension JSON {
@@ -153,4 +165,5 @@ public extension [AnyHashable: JSON] {
     compactMapValues(M.init(attempt:))
   }
 }
+
 #endif
