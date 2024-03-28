@@ -7,10 +7,6 @@ public protocol JSONDecodable {
 }
 
 extension JSON: JSONDecodable {
-  public var json: JSON {
-    self
-  }
-
   public init(json: JSON) throws {
     self = json
   }

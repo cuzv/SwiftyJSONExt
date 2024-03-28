@@ -78,3 +78,15 @@ public extension JSON {
     transform(self)
   }
 }
+
+// MARK: - Subscript
+
+public extension JSON {
+  subscript(_ path: String?) -> JSON {
+    if let path {
+      self[path]
+    } else {
+      self
+    }
+  }
+}
