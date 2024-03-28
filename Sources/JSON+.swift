@@ -65,7 +65,9 @@ public extension JSON {
 public extension JSON {
   /// JSON to string
   var utf8String: String? {
-    rawString(.utf8, options: [])
+    rawString(.utf8, options: [
+      .fragmentsAllowed,
+    ])
   }
 
   /// Map JSON to Model
